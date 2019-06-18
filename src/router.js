@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
 import InfoList from './views/InfoList.vue'
-import Test from '@/markdown/Test.md'
+import Info from './views/Info.vue'
 
 Vue.use(Router)
 
@@ -21,9 +21,9 @@ export default new Router({
       component: InfoList
     },
     {
-      path: '/test',
-      name: 'test',
-      component: Test
+      path: '/info',
+      name: 'info',
+      component: Info
     }
   ]
 })
