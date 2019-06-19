@@ -20,6 +20,7 @@ export default {
   created () {
     // Firesotreからの取得処理呼び出し
     this.getText()
+    marked.setOptions({ breaks: true })
   },
   methods: {
     getText () {
@@ -31,10 +32,13 @@ export default {
       docRef.get().then((doc) => {
         if (doc.exists) {
           this.title = doc.data().title
-          ret = doc.data().content
+
+          // 改行文字の置換
+          ret = doc.data().content.replace(/\\n/g, '\n')
         } else {
           ret = 'データがありませんでした'
         }
+
         // 取得したテキストをMarkdownからパース
         this.contentsText = marked(ret)
       })
