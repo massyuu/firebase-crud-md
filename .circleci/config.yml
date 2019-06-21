@@ -1,0 +1,22 @@
+version: 2
+jobs:
+  auto_deploy: # ジョブ名
+    docker:
+      - image: circleci/node:10.15
+    steps: # 実行したい処理を順番に記述
+      - checkout
+      - run: # 必要なパッケージを取得
+          name: npm install
+          command: npm i
+      - run: # ビルド
+          name: build
+          command: npm run build
+      - run: # デプロイ
+          name: deploy to Firebase Hosting
+          command: ./node_modules/.bin/firebase deploy --token=$FIREBASE_TOKEN
+
+workflows:
+  version: 2
+  deploy_test: # ワークフロー名
+    jobs:
+      - auto_deploy: # 上で定義したジョブ
