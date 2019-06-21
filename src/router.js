@@ -21,7 +21,7 @@ export default new Router({
       component: InfoList
     },
     {
-      path: '/info',
+      path: '/info/:id',
       name: 'info',
       component: Info
     }
