@@ -20,3 +20,6 @@ workflows:
   deploy_test: # ワークフロー名
     jobs:
       - auto_deploy: # 上で定義したジョブ
+          filters:
+            branches:
+              only: masuter
