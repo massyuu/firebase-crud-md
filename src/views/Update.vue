@@ -1,15 +1,12 @@
 <template>
   <div class="Update">
-    <input v-model="formData.title" placeholder="title">
-    <br>
-    <input v-model="formData.category" placeholder="category">
-    <br>
-    <input v-model="formData.tags" placeholder="tags">
-    <br>
-    <textarea v-model="formData.content" placeholder="content"></textarea>
-    <br>
-    <button @click="update">update</button>
-    <button @click="del">delete</button>
+    <H1>Update</H1>
+    <vs-input label="title" class="title md-input" placeholder="title" v-model="formData.title"/>
+    <vs-input label="category" class="category md-input" placeholder="category" v-model="formData.category"/>
+    <vs-input label="tags" class="tags md-input" placeholder="tags" v-model="formData.tags"/>
+    <vs-textarea label="content" class="content md-input" v-model="formData.content"/>
+    <vs-button color="primary" type="filled" @click="update">update</vs-button>
+    <vs-button color="danger" type="filled" @click="del">delete</vs-button>
   </div>
 </template>
 
@@ -69,3 +66,8 @@ export default {
   }
 }
 </script>
+<style scoped>
+.md-input {
+  margin: 10px auto;
+}
+</style>
