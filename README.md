@@ -1,1 +1,4 @@
-# firebase-md-out-deploy
+# firebase-crud-md
+FirestoreのCRULを実装するサンプルです。
+また、Markdownでの出力サンプルでもあります。
+
