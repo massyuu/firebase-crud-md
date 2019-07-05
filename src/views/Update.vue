@@ -13,6 +13,8 @@
 <script>
 import firebase from '../firebase'
 
+const firestore = firebase.firestore()
+
 export default {
   name: 'Update',
   data () {
@@ -20,7 +22,7 @@ export default {
       // フォームのデータ
       formData: {},
       // Firebaseから取得したリファレンス
-      docRef: firebase.collection('markdown-contents').doc(this.$route.params.id)
+      docRef: firestore.collection('markdown-contents').doc(this.$route.params.id)
     }
   },
   created () {

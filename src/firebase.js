@@ -1,5 +1,4 @@
-import firebase from 'firebase'
-import 'firebase/firestore'
+import firebase from 'firebase/app'
 
 // Initialize Firebase
 const firebaseConfig = {
@@ -12,5 +11,6 @@ const firebaseConfig = {
   appId: 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
 }
 
-const firebaseApp = firebase.initializeApp(firebaseConfig)
-export default firebaseApp.firestore()
+firebase.initializeApp(firebaseConfig)
+
+export default firebase

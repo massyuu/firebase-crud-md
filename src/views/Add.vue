@@ -13,6 +13,8 @@
 import firebase from '../firebase'
 import moment from 'moment'
 
+const firestore = firebase.firestore()
+
 export default {
   name: 'Add',
   data () {
@@ -26,7 +28,7 @@ export default {
       this.formData.create = moment(new Date()).format('YYYY/MM/DD HH:mm:ss')
 
       // Firebaseへデータを登録する
-      firebase.collection('markdown-contents').add(this.formData).then((docRef) => {
+      firestore.collection('markdown-contents').add(this.formData).then((docRef) => {
         alert('データを登録しました。ID: ' + docRef.id)
         // フォームクリア
         this.formData = {}

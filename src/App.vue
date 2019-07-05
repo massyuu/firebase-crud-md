@@ -1,13 +1,37 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link>|
-      <router-link to="/infoList">InfoList</router-link>|
-      <router-link to="/add">Add</router-link>
+      <router-link to="/">Home</router-link>
+      <span v-if="userStatus">|</span>
+      <router-link to="/infoList" v-if="userStatus">InfoList</router-link>
+      <span v-if="userStatus">|</span>
+      <router-link to="/add" v-if="userStatus">Add</router-link>
     </div>
     <router-view/>
   </div>
 </template>
+<script>
+import auth from '@/auth'
+
+export default {
+  name: 'App',
+  created: function () {
+    // インスタンス生成時にログイン情報を取得
+    auth.onAuth()
+  },
+  computed: {
+    // ユーザー情報を算出
+    user () {
+      return this.$store.getters.user
+    },
+    // ログイン情報を算出
+    userStatus () {
+      // ログインするとtrue
+      return this.$store.getters.isLogin
+    }
+  }
+}
+</script>
 
 <style>
 #app {

@@ -9,6 +9,8 @@
 import marked from 'marked'
 import firebase from '../firebase'
 
+const firestore = firebase.firestore()
+
 export default {
   name: 'Info',
   data () {
@@ -25,7 +27,7 @@ export default {
   methods: {
     getText () {
       // Firebaseからデータを取得する
-      var docRef = firebase.collection('markdown-contents').doc(this.$route.params.id)
+      var docRef = firestore.collection('markdown-contents').doc(this.$route.params.id)
       var ret = ''
 
       // FireStoreのデータ取得は非同期

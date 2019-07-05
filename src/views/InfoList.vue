@@ -14,6 +14,9 @@
 
 <script>
 import firebase from '../firebase'
+import 'firebase/firestore'
+
+const firestore = firebase.firestore()
 
 export default {
   name: 'InfoList',
@@ -29,7 +32,7 @@ export default {
   methods: {
     getList () {
       // Firebaseから一覧を取得する
-      var ref = firebase.collection('markdown-contents')
+      var ref = firestore.collection('markdown-contents')
 
       // FireStoreのデータ取得は非同期
       ref.get().then((querySnapshot) => {
