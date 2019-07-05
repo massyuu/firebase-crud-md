@@ -51,3 +51,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.email-form div {
+  margin: 30px auto;
+}
+</style>

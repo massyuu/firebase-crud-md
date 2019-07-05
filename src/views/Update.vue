@@ -6,7 +6,6 @@
     <vs-input label="tags" class="tags md-input" placeholder="tags" v-model="formData.tags"/>
     <vs-textarea label="content" class="content md-input" v-model="formData.content"/>
     <vs-button color="primary" type="filled" @click="update">update</vs-button>
-    <vs-button color="danger" type="filled" @click="del">delete</vs-button>
   </div>
 </template>
 
@@ -47,17 +46,6 @@ export default {
       // Firebaseのデータを更新する
       this.docRef.set(this.formData).then(() => {
         alert('データを更新しました。')
-
-        // 一覧へ
-        this.$router.push('/infoList')
-      }).catch((error) => {
-        console.error('Error adding document: ', error)
-      })
-    },
-    del () {
-      // Firebaseのデータを削除する
-      this.docRef.delete().then(() => {
-        alert('データを削除しました。')
 
         // 一覧へ
         this.$router.push('/infoList')

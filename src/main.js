@@ -5,6 +5,7 @@ import store from './store'
 import auth from './auth'
 import Vuesax from 'vuesax'
 import 'vuesax/dist/vuesax.css'
+import 'material-icons/iconfont/material-icons.css';
 
 auth.init()
 
