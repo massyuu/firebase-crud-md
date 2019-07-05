@@ -1,10 +1,10 @@
 <template>
-  <div class="Update">
+  <div class="Update display-width">
     <H1>Update</H1>
-    <vs-input label="title" class="title md-input" placeholder="title" v-model="formData.title"/>
-    <vs-input label="category" class="category md-input" placeholder="category" v-model="formData.category"/>
-    <vs-input label="tags" class="tags md-input" placeholder="tags" v-model="formData.tags"/>
-    <vs-textarea label="content" class="content md-input" v-model="formData.content"/>
+    <vs-input label-placeholder="title" class="title md-input" placeholder="title" v-model="formData.title"/>
+    <vs-input label-placeholder="category" class="category md-input" placeholder="category" v-model="formData.category"/>
+    <vs-input label-placeholder="tags" class="tags md-input" placeholder="tags" v-model="formData.tags"/>
+    <vs-textarea label="content" class="content md-input md-textarea" v-model="formData.content"/>
     <vs-button color="primary" type="filled" @click="update">update</vs-button>
   </div>
 </template>
@@ -33,22 +33,34 @@ export default {
       this.docRef.get().then((doc) => {
         if (doc.exists) {
           this.formData = doc.data()
-          console.log(this.formData)
 
           // 改行文字の置換
           this.formData.content = this.formData.content.replace(/\\n/g, '\n')
         } else {
-          alert('データがありませんでした')
+          this.$vs.dialog({
+            color: 'error',
+            title: 'Error No Data',
+            text: 'データがありませんでした。',
+            accept: () => {
+              // 一覧へ
+              this.$router.push('/infoList')
+            }
+          })
         }
       })
     },
     update () {
       // Firebaseのデータを更新する
       this.docRef.set(this.formData).then(() => {
-        alert('データを更新しました。')
-
-        // 一覧へ
-        this.$router.push('/infoList')
+        this.$vs.dialog({
+          color: 'primary',
+          title: 'Update',
+          text: 'データを更新しました。',
+          accept: () => {
+            // 一覧へ
+            this.$router.push('/infoList')
+          }
+        })
       }).catch((error) => {
         console.error('Error adding document: ', error)
       })
@@ -56,8 +68,3 @@ export default {
   }
 }
 </script>
-<style scoped>
-.md-input {
-  margin: 10px auto;
-}
-</style>

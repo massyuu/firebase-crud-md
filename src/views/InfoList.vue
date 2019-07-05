@@ -1,6 +1,6 @@
 <template lang="html">
-  <div class="InfoList">
-    <h1>投稿一覧</h1>
+  <div class="InfoList display-width">
+    <h1>Information List</h1>
     <vs-table stripe max-items="10" pagination :data="this.list">
       <template slot-scope="{data}">
         <vs-tr v-for="row in data" :key="row.id">
@@ -92,10 +92,6 @@ export default {
 }
 </script>
 <style scoped>
-.InfoList {
-  width: 70%;
-  margin: 0 auto;
-}
 .title {
   width: 70%;
 }

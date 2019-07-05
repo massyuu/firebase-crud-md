@@ -1,9 +1,9 @@
 <template>
-  <div class="Add">
+  <div class="Add display-width">
     <H1>Create</H1>
-    <vs-input label="title" class="title md-input" placeholder="title" v-model="formData.title"/>
-    <vs-input label="category" class="category md-input" placeholder="category" v-model="formData.category"/>
-    <vs-input label="tags" class="tags md-input" placeholder="tags" v-model="formData.tags"/>
+    <vs-input label-placeholder="title" class="title md-input" placeholder="title" v-model="formData.title"/>
+    <vs-input label-placeholder="category" class="category md-input" placeholder="category" v-model="formData.category"/>
+    <vs-input label-placeholder="tags" class="tags md-input" placeholder="tags" v-model="formData.tags"/>
     <vs-textarea label="content" class="content md-input" v-model="formData.content"/>
     <vs-button color="primary" type="filled" @click="create">Create</vs-button>
   </div>
@@ -29,9 +29,15 @@ export default {
 
       // Firebaseへデータを登録する
       firestore.collection('markdown-contents').add(this.formData).then((docRef) => {
-        alert('データを登録しました。ID: ' + docRef.id)
-        // フォームクリア
-        this.formData = {}
+        this.$vs.dialog({
+          color: 'primary',
+          title: 'Create',
+          text: 'データを登録しました。ID: ' + docRef.id,
+          accept: () => {
+            // 一覧へ
+            this.$router.push('/infoList')
+          }
+        })
       }).catch((error) => {
         console.error('Error adding document: ', error)
       })
@@ -39,8 +45,3 @@ export default {
   }
 }
 </script>
-<style scoped>
-.md-input {
-  margin: 10px auto;
-}
-</style>

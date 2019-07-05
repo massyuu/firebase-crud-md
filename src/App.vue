@@ -2,10 +2,10 @@
   <div id="app">
     <div id="nav">
       <router-link to="/">Home</router-link>
-      <span v-if="userStatus">|</span>
+      <span v-if="userStatus"> | </span>
       <router-link to="/infoList" v-if="userStatus">InfoList</router-link>
-      <span v-if="userStatus">|</span>
-      <router-link to="/add" v-if="userStatus">Add</router-link>
+      <span v-if="userStatus"> | </span>
+      <router-link to="/add" v-if="userStatus">Create</router-link>
     </div>
     <router-view/>
   </div>
@@ -53,4 +53,19 @@ export default {
 #nav a.router-link-exact-active {
   color: #42b983;
 }
+
+.display-width {
+  width: 70%;
+  margin: 0 auto;
+}
+
+.md-input {
+  margin: 10px auto;
+}
+
+.md-input > .vs-textarea {
+  height: 300px;
+  font-size: 14px;
+}
+
 </style>
