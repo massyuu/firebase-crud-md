@@ -56,16 +56,17 @@ export default {
         accept: this.deleteInfo
       })
     },
-    getList () {
-      // Firebaseから一覧を取得する
-      collection.get().then((querySnapshot) => {
+    async getList () {
+      try {
+        // Firebaseから一覧を取得する
+        let querySnapshot = await collection.get()
         querySnapshot.forEach((doc) => {
           // リストへ追加
           this.list.push({ id: doc.id, title: doc.data().title })
         })
-      }).catch((error) => {
+      } catch (error) {
         console.log('Error getting documents: ', error)
-      })
+      }
     },
     updateInfo (contentsId) {
       // 更新画面へ遷移

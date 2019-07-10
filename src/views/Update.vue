@@ -28,9 +28,10 @@ export default {
     this.getData()
   },
   methods: {
-    getData () {
-      // FireStoreのデータ取得は非同期
-      this.docRef.get().then((doc) => {
+    async getData () {
+      try {
+        // FireStoreのデータ取得は非同期
+        let doc = await this.docRef.get()
         if (doc.exists) {
           this.formData = doc.data()
 
@@ -47,11 +48,15 @@ export default {
             }
           })
         }
-      })
+      } catch (error) {
+        console.log('Error getting documents: ', error)
+      }
     },
-    update () {
-      // Firebaseのデータを更新する
-      this.docRef.set(this.formData).then(() => {
+    async update () {
+      try {
+        // Firebaseのデータを更新する
+        await this.docRef.set(this.formData)
+
         this.$vs.dialog({
           color: 'primary',
           title: 'Update',
@@ -61,9 +66,9 @@ export default {
             this.$router.push('/infoList')
           }
         })
-      }).catch((error) => {
+      } catch (error) {
         console.error('Error adding document: ', error)
-      })
+      }
     }
   }
 }

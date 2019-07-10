@@ -25,13 +25,12 @@ export default {
     marked.setOptions({ breaks: true })
   },
   methods: {
-    getText () {
+    async getText () {
+      let ret = ''
       // Firebaseからデータを取得する
-      var docRef = firestore.collection('markdown-contents').doc(this.$route.params.id)
-      var ret = ''
-
-      // FireStoreのデータ取得は非同期
-      docRef.get().then((doc) => {
+      try {
+        // FireStoreのデータ取得は非同期
+        let doc = await firestore.collection('markdown-contents').doc(this.$route.params.id).get()
         if (doc.exists) {
           this.title = doc.data().title
 
@@ -43,7 +42,9 @@ export default {
 
         // 取得したテキストをMarkdownからパース
         this.contentsText = marked(ret)
-      })
+      } catch (error) {
+        console.log('Error getting documents: ', error)
+      }
     }
   }
 }

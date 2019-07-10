@@ -23,12 +23,13 @@ export default {
     }
   },
   methods: {
-    create () {
+    async create () {
       // 現在日時
       this.formData.create = moment(new Date()).format('YYYY/MM/DD HH:mm:ss')
 
-      // Firebaseへデータを登録する
-      firestore.collection('markdown-contents').add(this.formData).then((docRef) => {
+      try {
+        // Firebaseへデータを登録する
+        let docRef = await firestore.collection('markdown-contents').add(this.formData)
         this.$vs.dialog({
           color: 'primary',
           title: 'Create',
@@ -38,9 +39,9 @@ export default {
             this.$router.push('/infoList')
           }
         })
-      }).catch((error) => {
+      } catch (error) {
         console.error('Error adding document: ', error)
-      })
+      }
     }
   }
 }
