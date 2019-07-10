@@ -6,6 +6,9 @@
       <router-link to="/infoList" v-if="userStatus">InfoList</router-link>
       <span v-if="userStatus"> | </span>
       <router-link to="/add" v-if="userStatus">Create</router-link>
+      <p id="login-info" v-if="userStatus">
+        login as {{ user.displayName }}
+      </p>
     </div>
     <router-view/>
   </div>
@@ -67,5 +70,7 @@ export default {
   height: 300px;
   font-size: 14px;
 }
-
+#login-info {
+  text-align: right;
+}
 </style>

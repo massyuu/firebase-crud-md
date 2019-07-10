@@ -16,6 +16,10 @@ export default new Vuex.Store({
     // ログイン状態（ログイン or 未ログイン）
     onUserStatusChanged (state, status) {
       state.status = status
+    },
+    // userコレクションの表示名をセット
+    onLoginedDisplayName (state, name) {
+      state.user.displayName = name
     }
   },
   getters: {
