@@ -4,12 +4,17 @@
     <vs-input label-placeholder="title" class="title md-input" placeholder="title" v-model="formData.title"/>
     <vs-input label-placeholder="category" class="category md-input" placeholder="category" v-model="formData.category"/>
     <vs-input label-placeholder="tags" class="tags md-input" placeholder="tags" v-model="formData.tags"/>
-    <vs-textarea label="content" class="content md-input" v-model="formData.content"/>
+    <p class="contents-header-label">contents</p>
+    <div class="text-prev">
+      <vs-textarea class="content md-input md-textarea" v-model="formData.content" @input="updatePreview"/>
+      <div class="preview markdown-text" v-html="prevText">aaaaaa</div>
+    </div>
     <vs-button color="primary" type="filled" @click="create">Create</vs-button>
   </div>
 </template>
 
 <script>
+import marked from 'marked'
 import firebase from '../firebase'
 import moment from 'moment'
 
@@ -42,6 +47,9 @@ export default {
       } catch (error) {
         console.error('Error adding document: ', error)
       }
+    },
+    updatePreview () {
+      this.prevText = marked(this.formData.content)
     }
   }
 }
